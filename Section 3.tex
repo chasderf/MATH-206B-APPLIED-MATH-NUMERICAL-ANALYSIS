@@ -1,0 +1,110 @@
+\documentclass{article}
+
+\begin{document}
+
+\title {Numerical Analysis Chapter 3 Interpolation and Polynomial Approximation}
+
+\author{Charlie Seager}
+
+\textbf {Chapter 3.1 Interpolation and the Lagrange Polynomial}
+
+\textbf {Theorem 3.1 (Weiestrass Approximation Theorem)} \\
+Suppose that f is defined and continuous on [a,b]. For each $\epsilon > 0$, there exists a polynomial P(x), with the property that 
+\begin{center}
+$|f(x) - P(x)| < \epsilon,$    for all x in [a,b]
+\end{center}
+
+\textbf {Theorem 3.2} If $x_o, x_1,..., x_n$ are n + 1 distinct numbers and f is a function whose values are given at these numbers, then a unique polynomial P(x) of degree at most n exists with
+\begin{center}
+$f(x_k)=P(x_k),$ for each k = 0,1,...,n
+\end{center}
+
+\textbf {Theorem 3.3} Suppose $x_o, x_1,...,x_n$ are distinct numbers in the interval [a,b] and $f \in C^{n+1}$[a,b]. Then, for each x in [a,b] exists with 
+\begin{center}
+$f(x) = P(x) + \frac{f^{(n+1)}(\xi(x))}{(n+1)!} (x-x_o)(x-x_1)\dots (x-x_n),$
+\end{center}
+where P(x) is the interpolating polynomial given in Eq. (3.1)
+
+\textbf{Chapter 3.2 Data approximation and Nevilles Method}
+
+\textbf {Definition 3.4} Let f be a function defined at $x_o, x_1, x_2,...,x_n$ and suppose that $m_1, m_2, ..., m_k$ are k distinct integers with $0 \leq m_i \leq n$ for each i. The lagrange polynomial that agrees with f(x) at the k points $x_{m1}, x_{m2},..., x_{mk}$ is denoted $P_{m1, m2,...,mk}(x)$
+
+\textbf {Theorem 3.5} Let f be defined at $x_0, x_1, ..., x_k$ and let $x_j$ and $x_i$ be two distinct numbers in this set. Then 
+\begin{center}
+$P(x) = \frac{(x-x_j) P_{0,1...j-1, j+1,...,k}(x) -(x-x_i)P_{0,1...i-1, i+1,...,k}(x)}{(x_i - x_j)}$
+\end{center}
+is the kth lagrange polynomial that interpolates f at the k + 1 points $x_0, x_1,..., x_k$.
+
+\textbf {Chapter 3.3 Divided Differences}
+
+\textbf {Theorem 3.6} Suppose that $f \in C^n [a,b]$ and $x_0, x_1,...,x_n$ are distinct numbers in [a,b]. Then a number $\xi$ exists in (a,b) with
+\begin{center}
+$f[x_0, x_1,...,x_n] = \frac{f^{(n)} (\xi)}{n!}$
+\end{center}
+
+\textbf {Definition 3.7} Given the sequence $\{p_n\}_{n=0}^\infty$ define the backward difference $\nabla p_n$ (read nabla $p_n$) by 
+\begin{center}
+$\nabla p_n = p_n - p_{n-1},$ for $n \geq 1$
+\end{center}
+Higher powers are defined recursively by
+\begin{center}
+$\nabla^k p_n = \nabla (\nabla^{k-1} p_n)$ for $k \geq 2$
+
+\textbf {Chapter 3.4 Hermite Interpolation}
+
+\textbf {Definition 3.8} Let $x_0, x_1,...,x_n$ be n + 1 distinct numbers in [a,b] and for i = 0,1,...,n let $m_i$ be a nonnegative integer. Suppose that $f \in C^m [a,b],$ where m = $max_{0 \leq i \leq n} m_i$.
+
+\textbf {Theorem 3.9} If $f \in C^1 [a,b]$ and $x_0,...,x_n \in [a,b]$ are distinct, the unique polynomial of least degree agreeing with f and $f^{'}$ at $x_0,...,x_n$ is the Hermite polynomial of degree at most 2n + 1 given by
+\begin{center}
+$H_{2n + 1} (x) = \sum_{j=0}^{n} f(x_i) H_{n,j}(x) + \sum_{j=0}^{n} f^{'} (x_j) \hat{H}_{n,j} (x)$
+\end{center}
+\end{center}
+where, for $L_{n,j}(x)$ denoting the jth lagrange coefficient polynomial of degree n, we have \
+\begin{center}
+$H_{n,j}(x) = [1 - 2(x-x_j)L_{n,j}^{'} (x_j)]L_{n,j}^{2}(x)$ and $\hat{H}_{n,j}(x) = (x-x_j)L_{n,j}^2(x).$
+\end{center}
+Moreover, if $f \in C^{2n + 2} [a,b]$ then
+\begin{center}
+$f(x) = H_{2n+1} (x) + \frac{(x-x_0)^2 \dots (x-x_n)^2}{(2n + 2)!} f^{2n + 2} (\xi(x)),$
+\end{center}
+for some (generally unknown) $\xi(x)$ in the interval (a,b).
+
+\textbf {Chapter 3.5 Cubic Spline Interpolation}
+
+\textbf {Definition 3.10} Given a function f defined on [a,b] and a set of nodes $x_0 < x_1 < ... < x_n = b$, a cubic spline interpolant S for f is a function that satisfies the following conditions:
+\begin{center}
+(a) S(x) is a cubic polynomial, denoted $S_j(x)$ on the subinterval $[x_j, x_{j+1}]$ for each j = 0,1,...,n-1. \\
+(b) $S_j(x_j) = f(x_{j+1})$ for each j = 0,1,...,n-1 \\
+(c) $S_{j+1}(x_{j+1}) = S_j(x_{j+1}$ for each j = 0,1,...,n-2; (implied by (b)) \\
+(d) $S^{'}_{j+1}(x_{j+1}) = S^{'}_j(x_{j+1})$ for each j = 0,1,...,n-2; \\
+(e) $S^{''}_{j+1}(x_{j+1}) = S^{''}_j(x_{j+1}$ for each j = 0,1,...,n-2; \\
+(f) One of the following sets of boundary conditions is satisfied. \\
+(i) $S^{''}(x_0) = S^{''}(x_n) = 0$ (natural or free boundary) \\
+(ii) $S^{"}(x_0) = f^{'}(x_0)$ and $S^{'}(x_n) = f^{'}(x_n)$ (clamped boundary). 
+\end{center}
+
+\textbf {Theorem 3.11} If f is defined at $a = x_0 < x_1 < \dots < x_n = b$, then f has a unique natural spline interpolant S on the nodes $x_0, x_1, \dots x_n$; that is a spline interpolant that satisfies the natural boundary conditions $S^{''}(a) = 0$ and $S^{''}(b) = 0$
+
+\textbf {Theorem 3.12} If f is defined at $a = x_0 < x_1 < \dots < x_n = b$ and differentiable at a and b, then f has a unique clamped spline interpolant S on the nodes $x_0, x_1,...,x_n$; that is, a spline interpolant that satisfies the clamped boundary conditions $S^{'}(a) = f^{'}(a)$ and $S^{'}(b) = f^{'}(b)$
+
+\textbf {Theorem 3.13} Let $f \in C^4[a,b]$ with $max_{a \leq x \leq b}|f^{(4)}(x)| = M$. If S is the unique clamped cubic spline interpolant to f with respect to the nodes $a = x_0 < x_1 < \dots x_n = b$, then for all x in [a,b]
+\begin{center}
+$|f(x) - S(x)| \leq \frac{5M}{384} max_{0 \leq j \leq n-1}{(x_{j+1} - x_j)}^4$
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

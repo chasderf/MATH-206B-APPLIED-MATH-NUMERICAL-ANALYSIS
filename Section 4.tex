@@ -1,0 +1,216 @@
+\documentclass{article}
+\usepackage{amsmath}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\begin{document}
+\title{Numerical Analysis Section 4: Numerical Differentiation and integration, IVP and BVP} 
+\author{Charlie Seager}
+
+\maketitle
+
+\textbf {Chapter 4 Numerical Differentiation and Integration}
+
+\textbf {Chapter 4.1 Numerical Differentiation}
+
+\textbf {Chapter 4.2 Richardson's Extrpolation}
+
+\textbf {Chapter 4.3 Elements of Numerical Integration}
+
+\textbf {Definition 4.1} The degree of accuracy or precission of a quadrature formula is the largest positive integer n such that the formula is exact for $x^k$ for each k = 0,1,...,n.
+
+\textbf {Thoerem 4.2} Suppose that $\sum_{i=0}^n a_i f(x_i)$ denoted the (n+1)-point closed Newton-Cotes formula with $x_0 = a, x_n = b$ and $h = (b-a)/n$. There exists $\xi \in (a,b)$ for which
+\begin{center}
+$\int_a^b f(x) dx = \sum_{i=0}^n a_i f(x_i) + \frac{h^{n+3} f^{(n+2)}(\xi)}
+{(n+2)!} \int_0^n t^2(t-1) \dots (t-n) dt$
+\end{center}
+if n is even and $f \in C^{n+2}[a,b]$ and 
+\begin{center}
+$\int_a^b f(x) dx = \sum_{i=0}^n a_i f(x_i) + \frac {h^{n+2} f^{(n+1)}(\xi)}
+{(n+1)!} \int_0^n t(t-1) \dots (t-n) dt$
+\end{center}
+
+if n is odd and $f \in C^{n+1}[a,b]$
+
+\textbf {Theorem 4.3} Suppose that $\sum_{i=0}^{n} a_i f(x_i)$ denotes the (n+1)-point open Newton-Cotes formula with $x_{-1} = a, x_{n+1} = b,$ and $h = (b-a)/(n+2)$. There exists $\xi \in (a,b)$ for which 
+\begin{center}
+$\int_a^b f(x) dx = \sum_{i=0}^n a_i f(x_i) + \frac{h^{n+3} f^{(n+2)} (\xi)}{(n+2)!} \int_{-1}^{n+1} t^2(t-1) \dots (t-n)dt $
+\end{center}
+if n is even and $f \in C^{n+2}[a,b]$ and 
+\begin{center}
+$\int_a^b f(x) dx = \sum_{i=0}^n a_i f(x_i) + \frac{h^{n+2} f^{(n+1)} (\xi)}{(n+1)!} \int_{-1}^{n+1} t(t-1) \dots (t-n) dt$
+\end{center}
+if n is odd and $f \in C^{n+1}[a,b]$
+
+\textbf {Chapter 4.4 Composite Numerical Integration}
+
+\textbf {Theorem 4.4} Let $f \in C^4[a,b]$, n be even, h = (b-a)/n, and $x_j = a + jh$ for each j = 0, 1,...,n. There exists a $\mu \in (a,b)$ for which the Composite Simpson's rule for n subintervals can be written with its error term as
+\begin{center}
+$\int_a^b f(x) dx = \frac{h}{3}
+[
+f(a)  + 2 \sum_{j=1}^{(n/2)-1}  f(x_{2j}) + 4 \sum_{j=1}^{n/2}  f(x_{2j-1}) + f(b)
+]
+- \frac{b-a}{180} h^4 f^{(4)} (\mu)$
+\end{center}
+
+\textbf {Theorem 4.5} Let $f \in C^2 [a,b], h = (b-a)/n$ and $x_j = a + jh$ for each j = 0,1,...,n. There exists a $\mu \in (a,b)$ for which the Composite Trapezoidal rule for n subintervals can be written with its error term as
+\begin{center}
+$\int_a^b f(x) dx = \frac{h}{2} [f(a) + 2 \sum_{j=1}^{n-1} f(x_i) + f(b)] - \frac{b-a}{12} h^2 f^{''} (\mu)$
+\end{center}
+
+\textbf {Theorem 4.6} Let $f \in C^2 [a,b]$, n be even h = (b-a)/(n+2), and $x_i = a + (j+1)h$ for each j = -1,0,...,n+1. There exists a $\mu \in (a,b)$ for which the Composite Midpoint rule for n + 2 subintervals can be written with its error term as
+\begin{center}
+$\int_a^b f(x) dx = 2h \sum_{j=0}^{n/2} f(x_{2j}) + \frac{b-a}{6} h^2 f^{''} (\mu)$
+\end{center}
+
+\textbf {Chapter 4.5 Romberg Integration}
+
+\textbf {Chapter 4.6 Adaptive Quadrature Methods}
+
+\textbf {Chapter 4.7 Gaussian Quadrature}
+
+\textbf {Theorem 4.7} Suppose that $x_1, x_2,..., x_n$ are the roots of the nth Legendre polynomial $P_n(x)$ and that for each i = 1,2,...,n, the numbers $c_i$ are defined by
+\begin{center}
+$c_i = \int_{-1}^1 {\prod_{\substack {j=1 \\ j \neq 1}}^n} \frac{x-x_j}{x_i - x_j} dx$
+\end{center}
+
+If P(x) is any polynomial of degree less than 2n, then 
+\begin{center}
+$\int_{-1}^1 P(x) dx = \sum_{i = 1}^n c_i P(x_i)$
+\end{center}
+
+\textbf {Chapter 4.8 Multiple Integrals}
+
+\textbf {Chapter 4.9 Improper Integrals}
+
+\textbf {Chapter 5 Initial-Value Problems for Ordinary Differential Equations}
+
+\textbf {Chapter 5.1 The Elementary Theory of Initial-value Problems}
+
+\textbf {Definition 5.1} A function f(t,y) is said to satisfy a Lipshitz condition in the variable y on a set $D \subset R^2$ if a constant > 0 exists with
+\begin{center}
+$|f(t,y_1)-f(t,y_2)| \leq L |y_1 - y_2|,$
+\end{center}
+whenever $(t, y_1)$ and $(t, y_2)$ are in D. The constant L is called a Lipschitz condition for f.
+
+\textbf {Definition 5.2} A set $D \subset R^2$ is said to be convex if whenever $(t_1, y_1)$ and $(t_2, y_2)$ belong to D, then $((1 - \lambda) t_1 + \lambda t_2, (1 - \lambda) y_1 + \lambda y_2)$ also belongs to D for every $\lambda$ in [0,1].
+
+\textbf {Theorem 5.3} Suppose f(t,y) is defined on a convex set $D \subset R^2$. If a constant L > 0 exists with
+\begin{center}
+$|\frac{\partial f}{\partial y} | \leq L,$ for all $(t, y) \in D$
+\end{center}
+then f satisfies a Lipschitz condition on D in the variable y with Lipshitz constant L.
+
+\textbf {Theorem 5.4} Suppose that $D = \{ (t,y) | a \leq t \leq b$ and $-\infty < y < \infty$ \} and that f(t,y) is continous on D. If f satisfies a Lipshitz condition on D in the variable y, then the initial-value problem
+\begin{center}
+$y^{'}(t) = f(t,y),   a \leq t \leq b,   y(a) = \alpha$
+\end{center}
+has a unique solution y(t) for $a \leq t \leq b$
+
+\textbf {Definition 5.5} The initial-value problem 
+\begin{center}
+$ \frac{dy}{dt} = f(t,y) a \leq t \leq b, y(a) = \alpha$
+\end{center}
+is said to be a well posed problem if:
+1. A unique solution y(t), to the problem exists, and \\
+2.There exists constants $\epsilon_0 > 0$ and k > 0 such that for any $\epsilon$, with $\epsilon_0 > \epsilon > 0$ whenever $\delta (t)$ is continous with $|\delta(t)| < \epsilon$ for all t in [a,b], and when $\delta_0| < \epsilon$, the initial value problem
+\begin{center}
+$\frac{dz}{dt} = f(t,z) + \delta(t), a \leq t \leq b, z(a) = \alpha + \delta_0$
+\end{center}
+has a unique solution z(t) that satisfies 
+\begin{center}
+$|z(t) - y(t)| < k \epsilon$   for all t in [a,b]
+\end{center}
+
+\textbf {Theorem 5.6} Suppose $D = \{ (t,y) | a \leq t \leq b$ and $- \infty < y < \infty \}$. If f is continous and satisfies a Lipshitz condition in the variable y on the set D, then the initial-value problem
+\begin{center}
+$\frac{dy}{dt} = f(t,y)$     $a \leq t \leq b$    $y(a) = \alpha$
+\end{center}
+is well-posed.
+
+\textbf {Chapter 5.2 Euler's Method}
+
+\textbf {Theorem 5.9} Suppose f is continous and satisfies a Lipshitz condition with constant L on
+\begin{center}
+$D = \{ (t,y) | a \leq t \leq b$ and $- \infty < y < \infty\}$
+\end{center}
+and that a constant M exists with
+\begin{center}
+$|y^{''}(t)| \leq M$,    for all $t \in [a,b]$
+\end{center}
+where y(t) denotes the unique solution to the initial value problem
+\begin{center}
+$y^{'} = f(t,y),   a \leq t \leq b,    y(a) = \alpha$
+\end{center}
+
+Let $\omega_0, \omega_1 ,..., \omega_N$ be the approximations generated by Euler's method for some integer N. Then, for each i = 0,1,2,..,N
+\begin{center}
+$|y(t_i) - \omega_i | \leq \frac{hM}{2L} [e^{L(t_i - a)} - 1]$
+\end{center}
+
+\textbf {Theorem 5.10} Let y(t) denote the unique solution to the initial-value problem
+\begin{center}
+$y^{'} = f(t,y),  a \leq t \leq b   y(a) = \alpha$
+\end{center}
+and $u_0, u_1,...,u_N$ be the approximation obtained using (5.11). If $|\delta_i| < \delta$ for each i = 0,1,...,N and the hypotheses of Theorem 5.9 hold for (5.12), then
+\begin{center}
+$| y(t_i) - u_i| \leq \frac{1}{L} (\frac{hM}{2} +  \frac{\delta}{h}) [e^{L(t_i - a)} - 1] + |\delta_0| e^{L(t_i - a)},$
+\end{center}
+for each i = 0,1,...,N.
+
+\textbf {Chapter 5.4 Runge-Kutta Methods}
+
+\textbf {Theorem 5.13} Suppose that f(t,y) and all its partial derivatives of order less than or equal to n + 1 are continous on $D = \{(t,y) | a \leq t \leq b, c \leq y \leq d \}$ and let $(t_0, y_0) \in D$. For every $(t,y) \in D$, there exists $\xi$ between t and $t_0$ and $\mu$ between y and $y_0$ with
+\begin{center}
+$f(t,y) = P_n (t,y) + R_n(t,y)$
+\end{center}
+where
+\begin{center}
+$P_n(t,y) = f(t_0, y_0) + [ (t-t_0) \frac{\partial f}{\partial t} (t_0, y_0) + (y-y_0) \frac{\partial f}{\partial y} (t_0, y_0)]$ \\
+$+ [\frac{(t-t_0)^2}{2} \frac{\partial^2 f}{\partial t^2} (t_0, y_0) + (t-t_0)(y-y_0) \frac{\partial^2 f}{\partial t \partial y} (t_0, y_0)$ \\
+$+ \frac {(y-y_0)^2}{2} \frac{\partial^2 f}{\partial y^2} (t_0, y_0)] \dots$ \\
+$+ [ \frac{1}{n!} \sum_{j=0}^n (^{n}_{j})(t-t_0)^{n-j} (y-y_0)^j \frac{\partial^n f}{\partial t^{n-j} \partial y^j}(t_0, y_0)]$
+\end{center}
+and
+\begin{center}
+$R_n(t,y) = \frac{1}{(n+1)!} \sum_{j=0}^{n+1} (^{n+1}_{j})(t-t_0)^{n+1-j}(y-y_0)^j \frac{\partial^{n+1}}{\partial t^{n+1-j} \partial y^j}(\xi, \mu)$
+\end{center}
+The function $P_n(t,y)$ is called the nth Taylor polynomial in two variables for the function f about $(t_0, y_0)$ and $R_n(t,y)$ is the remainder term associated with $P_n(t,y)$.
+
+\textbf {Chapter 11 Boundary-Value Problems for Ordinary Differential Equations}
+
+\textbf {Chapter 11.1 The Linear Shooting Method}
+
+\textbf {Theorem 11.1} Suppose the function f in the boundary-value problem
+\begin{center}
+$y^{''} = f(x,y, y^{'}),$ for $a \leq x \leq b$ with y(a) = $\alpha$ and y(b) = $\beta$
+\end{center}
+is continous on the set
+\begin{center}
+$D = \{ (x, y, y^{'}) |$ for $ a \leq x \leq b$ with $- \infty < y < \infty$ and $- \infty < y^{'} < \infty$\}
+\end{center}
+and that the partial derivatives $f_y$ and $f_{y'}$ are also continous on D. If
+\\
+(i) $f_y (x, y, y^{'}) > 0$, for all $(x, y, y^{'}) \in D$, and \\
+(ii) a constant M exists with
+\begin{center}
+$| f_{y'} (x, y, y^{'})| \leq M,$ for all $(x, y, y^{'}) \in D$
+\end{center}
+then the boundary-value problem has a unique solution.
+
+\textbf {Corollary 11.2} Suppose the linear boundary-value problem
+\begin{center}
+$ y^{''} = p(x) y^{'} + q(x)y + r(x),$  for $a \leq x \leq b$ with $y(a) = \alpha$ and $y(b) = \beta$.
+\end{center}
+satisfies \\
+(i) p(x), q(x) and r(x) are continous on [a,b] \\
+(ii) $q(x) > 0$ on [a,b] \\
+Then the boundary-value problem has a unique solution.
+
+\textbf {Theorem 11.3} Suppose that p, q and r are continous on [a,b]. If $q(x) \geq 0$ on [a,b], then the tridiagonal linear system (11.19) has a unique solution provided that $h < 2/L$ where $L = {max}_{a \leq x \leq b} |p(x)|$
+
+\textbf {Theorem 11.4} Let $p \in C^1 [0,1], q, \in C[0,1]$ and 
+\begin{center}
+$p(x) \geq \delta > 0$\tab $q(x) \geq 0$ \tab  for $0 \leq x \leq 1$
+\end{center}
+
+
+\end{document}

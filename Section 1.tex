@@ -1,0 +1,144 @@
+\documentclass{article}
+\begin{document}
+
+\title{Math 206B Introduction to Numerical Analysis notes based off "Numerical Analysis by R.L. Burden and J.D. Faires" Section 1 which is Numerical Solution of Nonlinear Equations}
+\author{Charlie Seager}
+\maketitle
+
+\textbf{2.1 The Bisection Method}
+
+\textbf {Bisection Technique} The first technique based on the Intermediate Value Theorem, is called the Bisection or Binary Search method.
+
+\textbf {Theorem 2.1} Suppose that $f \in C[a,b]$ and $f(a) \cdot f(b) < 0$. The Bisection method generates a sequence ${\{p_n\}_{n=1}^{\infty}}$ approximating a zero p of f with
+
+\begin{center}
+$| p_n - p| \leq \frac{b-a}{2^n}$, when $n \geq 1$
+\end{center}
+
+\textbf{Chapter 2.2 Fixed Point Iteration} A fixed point for the function is a number at which the value of the function does not change when the function is applied.
+
+\textbf{Defintion 2.2} The number p is a fixed point for a given function g if g(p) = p.
+
+\textbf{Theorem 2.3} (i) If $g \in C[a,b]$ and $g(x) \in [a,b]$ for all $x \in [a,b],$ then g has at least one fixed point in [a,b].
+\\ (ii) If, in addition $g'(x)$ exists on (a,b) and a positive constnant k < 1 exists with 
+\begin{center}
+$|g'(x) \leq k$, for all $x \in (a,b)$
+\end{center}
+then there is exactly one fixed point in [a,b].
+
+\textbf {Theorem 2.4 (Fixed Point Theorem)} Let $g \in C[a,b]$ be such that $g(x) \in [a,b]$ for all x in [a,b]. Suppose in addition that $g'$ exists on (a,b) and that a constant 0 < k < 1 exists with
+\begin{center}
+$|g'(x)| \leq k, $ for all $x \in (a,b)$
+\end{center}
+Then for any number $p_0$ in [a,b], the sequence defined by
+\begin{center}
+$p_n = g(p_{n-1}), n \geq 1.$
+\end{center}
+converges to the unique fixed point p in [a,b].
+
+\textbf {Corollary 2.5} If g satisfies the hypotheses of Th. 2.4, then bounds for the error involved in using $p_n$ to approximate p are given by
+\begin{center}
+$|p_n - p| \leq k^n max \{p_0 - a,b - p_0\}$
+\end{center}
+and
+\begin{center}
+$|p_n - p| \leq \frac{k^n}{1-k} |p_1 - p_0|,$ for all $n \geq 1$
+\end{center}
+
+\textbf {Chapter 2.3 Newtons Method and Its Extensions} 
+\\ Newtons (or the Newton-Raphson) method is one of the most powerful and well known numerical methods for solving a root-finding problem. There are many ways of introducing Newton's Method.
+
+\textbf {Theorem 2.6} Let $f \in C^2[a,b].$ If $p \in (a,b)$ is such that f(p) = 0 and $f'(p) \neq 0$ then there exists a $\delta > 0$ such that Newton's Method generates a sequence $\{p_n\}_{n=1}^{\infty}$ converging to p for any initial approximations $p_0 \in [p - \delta, p + \delta]$.
+
+\textbf {Chapter 2.4 Error Analysis for Iterative Methods} In this section we investigate the order of convergence of functional iteration schemes and as a means of obtaining rapid convergence, rediscover Newton's method. We also consider ways of accelerating the convergence of Newton's method in special circumstances. First, however, we need a new procedure for measuring how rapidly a sequence converges.
+
+\textbf {Defintion 2.7 Order of convergence} Suppose $\{p_n\}_{n=0}^{\infty}$ is a sequence that converges to p, with $p_n \neq p$ for all n. If positive constants $\lambda$ and $\alpha$ exist with
+\begin{center}
+$\displaystyle \lim_{n \to \infty} \frac{|p_{n+1}-p|}{|p_n - p|^{\alpha}} = \lambda$
+\end{center}
+then $\{p_n\}_{n=0}^{\infty}$ converges to p of order $\alpha$ with asymptotic error constant $\lambda$.
+
+\textbf {Theorem 2.8} Let $g \in C[a,b]$ be such that $g(x) \in [a,b]$ for all $x \in [a,b]$. Suppose, in addition that $g'$ is continous on (a,b) and a positive constant k < 1 exists with
+\begin{center}
+$|g'(x) \leq k$, for all $x \in (a,b)$
+\end{center}
+If $g'(p) \neq 0$, then for any number $p_0 \neq p$ in [a,b], the sequence
+\begin{center}
+$p_n = g(p_{n-1})$ for $n \geq 1$
+\end{center}
+converges only linearly to the unique fixed point p in [a,b]
+
+\textbf {Theorem 2.9} Let p be a solution of the equation x = g(x). Suppose that $g'(p) = 0$ and $g''$ is continous with $|g''(x)| < M$ on an open interval I containing p. Then there exists a $\delta > 0$ such that for $p_0 \in [p - \delta, p + \delta]$, the sequence defined by $p_n = g(p_{n-1})$ when $n \geq 1$, converges at least quadratically to p. Moreover for sufficiently large values of n.
+\begin{center}
+$|p_{n+1} - p| < \frac {M}{2} |p_n - p|^2$
+\end{center}
+
+\textbf {Defintion 2.10} A solution p of f(x) = 0 is a zero of multiplicity m of f if for $x \neq p$ we can write $f(x) = (x-p)^m q(x),$ where ${\lim_{x \to p}} q(x) \neq 0.$
+
+\textbf {Theorem 2.11} The function $f \in C^1[a,b]$ has a simple zero at p in (a,b) if and only if f(p) = 0, but $f'(p) \neq 0$
+
+\textbf {Theorem 2.12} The function $f \in C^m [a,b]$ has a zero of multiplicity m at p in (a,b) if and only if
+\begin{center}
+$0 = f(p) = f'(p) = f''(p) = \dots = f^{(m-1)} (p),$ but $f^{(m)} (p) \neq 0$
+\end{center}
+
+\textbf {Chapter 2.5 Accelerating Convergence} Therem 2.8 indicates that it is rare to have the luxury of quadratic convergence. We now consider a technique called Aitken's $\Delta^2$ method that can be used to accelerate the convergence of a seqeuence that is linearly convergent, regardless of its origin or application.
+
+\textbf{Defintion 2.13} For a given sequence $\{p_n\}_{n=0}^{\infty}$ the forward difference $\Delta p_n$ (read $"delta p_n"$) is defined by
+\begin{center}
+$\Delta p_n = p_{n+1} - p_n$ for $n \geq 0$
+\end{center}
+Higher powers of the operator $\Delta$ are defined recursively by
+\begin{center}
+$\Delta^k p_n = \Delta(\Delta^{k-1} p_n)$ for $k \geq 2$
+\end{center}
+
+\textbf {Theorem 2.14} Suppose that $\{p_n\}_{n=0}^{\infty}$ is a seqeunce that converges linearly to the limit p and that 
+\begin{center}
+$\displaystyle \lim_{n \to \infty} \frac {p_{n+1} - p}{p_n - p} < 1$
+\end{center}
+Then the Aitkeyn's $\Delta^2$ seqeunce $\{ \hat{p}_n\}_{n=0}^{\infty}$ converges to p faster than $\{p_n\}_{n=0}^{\infty}$ in the sense that
+\begin{center}
+$\displaystyle \lim_{n \to \infty} \frac { \hat{p}_n - p}{p_n - p} = 0.$
+\end{center}
+
+\textbf {Theorem 2.15} Suppose that x = g(x) has the solution p with $g'(p) \neq 1$. If there exists a $\delta > 0$ such that $g \in C^3[p - \delta, p + \delta]$, then Steffensen's method gives quadratic convergence for any $p_0 \in [p - \delta, p + \delta]$
+
+\textbf{Chapter 2.6 Zeros of Polynomials and Mullers Method}
+
+\textbf {Theorem 2.16 (Fundamental Theorem of Algebra)} \\
+If P(x) is a polynomial of degree $n \geq 1$ with real or complex coefficients, the P(x) = 0 has at least one (possibly complex) root.
+
+\textbf {Corollary 2.17} If P(x) is a polynomail of degree $n \geq 1$ with real or complex coefficients, then there exist unique constants $x_1, x_2,..,x_k$ possibly complex and unique positive integers $m_1,m_2,...,m_k$ such that $\Sigma_{i=1}^{k} m_i = n$ and 
+\begin{center}
+$P(x) = a_n(x-x_1)^{m_1} (x - x_2)^{m_2}... (x-x_k)^{m_k}$
+\end{center}
+
+\textbf {Corollary 2.18} Let P(x) and Q(x) be polynomials of degree at most n. If $x_1, x_2,...,x_k$ with k > n, are distinct numbers with $P(x_i) = Q(x_i)$ for $i = 1,2,...,k$ then P(x) = Q(x) for all values.
+
+\textbf {Theorem 2.19 (Horners Method)} \\ Let
+\begin{center}
+$P(x) = a_n X^n + a_{n-1} X^{n-1} + ... + a_1 x + a_0$
+\end{center}
+Define $b_n = a_n$ and 
+\begin{center}
+$b_k = a_k + b_{k+1} x_0$. for k = n - 1, n - 2,..., 1,0.
+\end{center}
+Then $b_0 = P(x_0)$. Moreover if
+\begin{center}
+$Q(x) = b_n X^{n-1} + b_{n-1} x^{n-2} + ... +b_2 x + b_1.$
+\end{center}
+then
+\begin{center}
+$P(x) = (x- x_0) Q(x) + b_0$
+\end{center}
+
+\textbf {Theorem 2.20} If $z = bi$ is a complex zero of multiplicity m of the polynomial P(x) with real coefficients then $\bar{z} = a - bi$ is also a zero of multiplicty m of the polynomial P(x) and $(x^2 - 2ax + a^2 + b^2)^m$ is a factor of P(x).
+
+\textbf {Chapter 2.7 Survey of Methods and Software}
+
+
+
+
+
+\end{document}

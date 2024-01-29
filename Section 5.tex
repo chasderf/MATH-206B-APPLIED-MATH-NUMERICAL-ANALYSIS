@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+
+
+\title{Numerical Analysis 206B Approximation Theory Chapter 8}
+\author{Charlie Seager}
+\maketitle
+
+\textbf {Chapter 8 Approximation Theory}
+
+\textbf {Chapter 8.1 Discrete Least Squares Approximation}
+
+\textbf {Chapter 8.2 Orthogonal Polynomials and Least Squares Approximation}
+
+\textbf {Definition 8.1} The set of functions $\{\phi_0 \dots \dots \phi_n\}$ is said to be linearly independent on [a,b] if, whenever
+\begin{center}
+$c_0 \phi_0 (x) + c_1 \phi_1(x) + \dots + c_n \phi_n (x) = 0$ \tab for all $x \in [a,b]$
+\end{center}
+we have $c_0 = c_1 = \dots = c_n = 0$. Otherwise the set of functions is said to be linearly dependent.
+
+\textbf {Theorem 8.2} Suppose that, for each j =0,1,...,n, $\phi_j (x)$ is a polynomial of degree j. Then $\{ \phi_0 \dots \phi_n \}$ is linearly independent on any interval [a,b].
+
+\textbf {Theorem 8.3} Suppose that $\{ \phi_0 (x), \phi_1 (x) \dots \phi_n(x)\}$ is a collection of linearly independent polynomials in $\prod_n$. Then any polynomial in $\prod_n$ can be written uniquely as a linear combination of $\phi_0 (x), \phi_1 (x), \dots \phi_n (x).$
+
+\textbf {Definition 8.4} An integrable function $\omega$ is called a weight function on the interval I if $\omega (x) \geq 0$ for all x in I, but $\omega(x) \neq 0$ on any subinterval of I.
+
+\textbf {Definition 8.5} $\{ \omega_0, \omega_1, \dots \phi_n \}$ is said to be an orthogonal set of functions for the interval [a,b] with respect to the weight function $\omega$ if
+\begin{center}
+$\int_a^b \omega(x) \phi_k (x) \phi_j (x) dx \ \{^{0 \tab \tab when j \neq k}_{\alpha_j > 0, \tab when j = k}$
+\end{center}
+If, in addition $\alpha_j = 1$ for each j = 0,1,...,n the set is said to be orthonormal.
+
+\textbf {Theorem 8.6} If $\{ \phi_0, \dots \phi_n \}$ is an orthogonal set of functions  on an interval [a,b] with respect to the weight function $\omega$, then the least squares approximation to f on [a,b] with respect to $\omega$ is 
+\begin{center}
+$P(x) = \sum_{j=0}^{n} a_j \phi_j (x)$
+\end{center}
+where for each j = 0,1,...,n
+\begin{center}
+$a_j = \frac { \int_{a}^{b} \omega (x) \phi_{j} (x) f(x) dx } {\int_{a}^{b} \omega (x) [\phi_{j} (x) ]^{2} dx} = \frac {1} {\alpha_j} \omega(x) \phi_{j} (x) f(x) dx.$
+\end{center}
+
+\textbf {Theorem 8.7} The set of polynomial functions $\{ \phi_0, \phi_1, ... , \phi_n \}$ defined in the following way is orthogonal on [a,b] with respect to the weight function $\omega$
+\begin{center}
+$\phi_0 (x) = 1 \tab \phi_1 (x) = x - B_1, \tab$ for each x in [a,b]
+\end{center}
+where
+\begin{center}
+$B_1 = \frac {\int_{a}^{b} x \omega (x) [\phi_0 (x)]^2 dx} {\int_{a}^{b} \omega (x) [\phi_0 (x)]^2 dx}$
+\end{center}
+and when $k \geq 2$
+\begin{center}
+$\phi_k (x) = (x - B_k) \phi_{k-1} (x) - C_{k} \phi_{k-2}(x),$ \tab for each x in [a,b]
+\end{center}
+where
+\begin{center}
+$B_k = \frac{\int_{a}^{b} x \omega (x) [\phi_{k-1} (x)]^2 dx} {\int_{a}^{b} \omega (x) [\phi_{k-1} (x)]^2 dx}$
+\end{center}
+and
+\begin{center}
+$C_k = \frac{\int_{a}^{b} x \omega (x) \phi_{k-1} (x) \phi_{k-2}(x) dx} {\int_{a}^{b} \omega (x) [\phi_{k-2} (x)]^2 dx}$
+\end{center}
+
+\textbf {Corollary 8.8} For any $n > 0$ the set of polynomial functions $\{ \phi_0,..., \phi_n\}$ given in Theorem 8.7 is linearly independent on [a,b] and
+\begin{center}
+$\int_{a}^{b} \omega (x) \phi_{n} (x) Q_{k} (x) dx = 0$
+\end{center}
+for any polynomial $Q_k (x)$ of degree $k < n$
+
+\textbf {Chapter 8.3 Chebyshev Polynomials and Economization of Power Series}
+
+\textbf {Theorem 8.9} The Chebyshev polynomial $T_n(x)$ of degree $n \geq 1$ has n simple zeros in [-1,1] at 
+\begin{center}
+$\bar{x}_{k} = cos (\frac{2k-1}{2n} \pi),$ \tab for each k = 1,2,...,n
+\end{center}
+Moreover $T_n(x)$ assumes its absolute extrema at 
+\begin{center}
+$\bar{x}_{k}^{'} = cos (\frac{k \pi}{n})$ with $T_n(\bar{x}_{k}^{'}) = (-1)^{k}$, \tab for each k = 0,1,...,n
+\end{center}
+
+\textbf {Theorem 8.10} The polynomials of the form $\bar{T}_n(x)$, when $n \geq 1$ have the property that
+\begin{center}
+$\frac{1}{2^{n-1}} = \underset{x \in [-1,1]}{max} |P_n(x)|,$ \tab for all $P_n(x) \in {\tilde{\prod_n}}$
+\end{center}
+Moreover, equality occurs only if $P_n = {\tilde{T}_n}$
+
+\textbf {Corollary 8.11} Suppose that P(x) is the interpolating polynomial of degree at most n with nodes at the zeros of $T_{n+1} (x)$. Then
+\begin{center}
+$\underset{x \in [-1,1]}{max} |f(x) - P(x)| \leq \frac {1} {2^n (n+1)!} \underset{x \in [-1,1]}{max} |f^{n+1} (x)|,$ \tab for each $f \in C^{n+1} [-1,1]$
+\end{center}
+
+\textbf {Chapter 8.4 Rational Function Approximation}
+
+\textbf {Chapter 8.5 Trigonometric Polynomial Approximation}
+
+\textbf {Lemma 8.12} Suppose that the integer r is not a multiple of 2m. Then
+\begin{center}
+$\sum_{j=0}^{2m-1} cos rx_j = 0$ and $\sum_{j=0}^{2m-1} sin rx_j = 0$
+\end{center}
+Moreover, if r is not a multiple of m, then
+\begin{center}
+$\sum_{j=0}^{2m-1} (cos rx_j)^2 = m$  and  $\sum_{j=0}^{2m-1} (sin rx_j)^2 = m$
+\end{center}
+
+\textbf {Theorem 8.13} The constants in the summation 
+\begin{center}
+$S_n (x) = \frac{a_0}{2} + a_n cos nx + \sum_{k=1}^{n-1} (a_k cos kx + b_k sin kx)$
+\end{center}
+that minimize the least squares sum
+\begin{center}
+$E(a_0,..., a_n, b_1,..., b_{n-1}) = \sum_{j=0}^{2m-1} (y_j - S_n (x_j))^2$
+\end{center}
+are
+\begin{center}
+$a_k = \frac {1} {m} \sum_{j=0}^{2m-1} y_j cos k x_j$ \tab for each k = 0,1,...,n
+\end{center}
+and 
+\begin{center}
+$b_k = \frac{1}{m} \sum_{j=0}^{2m-1} y_j sin kx_j$ \tab for each k = 1,2,...,n-1
+\end{center}
+
+\textbf {Chapter 8.6 Fast Fourier Transforms}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

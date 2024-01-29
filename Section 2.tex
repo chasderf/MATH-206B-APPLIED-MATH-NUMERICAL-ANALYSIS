@@ -1,0 +1,422 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+
+\title{Numerical Analysis: Section 2: Numerical Linear Algebra Chapter 6 and 7}
+\author{Charlie Seager}
+\maketitle
+
+\textbf {Chapter 6 Direct Methods for Solving Linear Systems}
+
+\textbf {Chapter 6.1 Linear Systems of Equations}
+
+\textbf {Defintion 6.1} An n X m (n by m) matrix is a rectangular array of elements with n rows and m column in which not only is the value of an element important, but also its position in the array. 
+
+\textbf {Chapter 6.2 Pivoting Strategies}
+
+\textbf {Scaled Partial Pivoting} Scaled partial pivoting (or scaled-column pivoting) is needed for the system in the illustration. It places the element in the pivot position that is largest relative to the entries in its row.
+
+\textbf {Chapter 6.3 Linear Algebra and Matrix Inversion} Matrices were introduced in Section 6.1 as a convenient method for expressing and manipulating linear systems. In this section we consider some algebra associated with matrices and show how it can be used to solve problems involving linear systems.
+
+\textbf{ Defintion 6.2} Two matrices A and B are equal if they have the same number of rows and columns, say n X m and if $a_{ij} = b_{ij},$ for each i = 1,2..., n and j = 1,2,..., m.
+
+\textbf {Definition 6.3} If A and B are both n X m matrices, then the sum of A and B, denoted A + B is the n X m matrix whose entries are $a_{ij} + b_{ij}$, for each i = 1,2,...,n and j = 1,2,...,m.
+
+\textbf {Definition 6.4} If A is an n X m matrix and $\lambda$ is a real number, then the scalar multiplication of $\lambda$ and A, denoted $\lambda$A, is the n X m matrix whose entries are $\lambda a_{ij}$ for each i = 1,2,...,n and j = 1,2,...,m.
+
+\textbf {Theorem 6.5} Let A,B and C be n X m matrices and $\lambda$ and $\mu$ be real numbers. The following properties of addition and scalar multiplication hold:
+\begin{center}
+(i) $A + B = B + A$ \\
+(ii) $(A + B) + C = A + (B + C) $ \\
+(iii) $A + O = O + A = A$ \\
+(iv) $A + -(A) = -A + A = 0$ \\
+(v) $\lambda (A + B) = \lambda A + \lambda B$ \\
+(vi) $(\lambda + \mu)A = \lambda A + \mu A$ \\
+(vii) $ \lambda (\mu A) = (\lambda \mu) A$ \\
+(viii) $1A = A$
+\end{center}
+All these properties follow from similar results concerning the real numbers.
+
+\textbf {Definition 6.6} Let A be an n X m matrix and b an m-dimensional column vector. The matrix vector product of A and b, denoted Ab, is an n-dimensional column vector given by
+\begin{center}
+$Ab = 
+\begin{bmatrix}
+ a_{11} & a_{12} & \dots & a_{1m} \\
+ a_{21} & a_{22} & \dots & a_{2m} \\
+ \vdots & \vdots & \vdots & \vdots \\
+ a_{n1} & a_{n2} & \dots & a_{nm}
+\end{bmatrix}
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_m
+\end{bmatrix}
+=
+\begin{bmatrix}
+\Sigma_{i = 1}^m a_{1i} b_i \\
+\Sigma_{i=1}^m a_{2i} b_i \\
+				. \\
+				. \\
+				. \\
+\Sigma_{i = 1}^{m} a_{mi} b{i}
+\end{bmatrix}
+$
+\end{center}
+
+\textbf{Definition 6.7} Let A be an n X n matrix and B an m X p matrix. The matrix product of A and B, denoted AB, is an n X p matrix C whose entries $c_{ij}$ are 
+\begin{center}
+$c_{ij} = \Sigma_{k=1}^m a_{i1} b_{1j} + a_{i2} b_{2j} + ... + a_{im} b_{mj},$
+\end{center}
+for each i = 1,2,...,n and j = 1,2,...,p.
+
+\textbf{Theorem 6.8} Let A be an n X m matrix, B be an m X k matrix, C be a k X p matrix, D be an m X k matrix and $\lambda$ be a real number. The following properties hold
+\begin{center}
+$(a) A(BC) = (AB)C;$				(b) A(B+D) = AB + AD; 			(c) $\lambda (AB) = (\lambda A) B = A(\lambda B)$
+\end{center}
+
+\textbf {Definition 6.9} \\ (i) A square matrix has the same number of rows as columns \\
+(ii) A diagonal matrix D = [$d_{ij}$] is a square matrix with $d_{ij} = 0$ whenever $i \neq j$ \\
+(iii) The identity matrix of order n, $I_n = [\delta_{ij}]$ is a diagonal matrix whose diagonal entries are all 1s. When the size of $I_n$ is clear the matrix is generally written simply as I.
+
+\textbf {Definition 6.10} An upper-triangular n X n matrix U = $[u_{ij}]$ has, for each j = 1,2,...,n, the entries
+\begin{center}
+$u_{ij} = 0,$ for each i = j + 1, j+2,...,n
+\end{center}
+
+and a lower triangular matrix L = $[I_{ij}]$ has, for each j = 1,2,..., n the entries
+\begin{center}
+$I_{ij} = 0,$ for each i = 1,2,..., j - 1.
+\end{center}
+A diagonal matrix, then is both upper triangular and lower triangular because its only nonzero entries must lie on the main diagonal.
+
+\textbf {Definition 6.11} An n X n matrix A is said to be nonsingular (or invertible) if an n X n matrix $A^{-1}$ exists with $AA^{-1} = A^{-1} A = I$. The matrix $A^{-1}$ is called the inverse of A. A matrix without inverse is called singular (or noninvertible).
+
+\textbf {Theorem 6.12} For any nonsingular n X n matrix A:
+\begin{center}
+(i) $A^{-1}$ is unique \\
+(ii) $A^{-1}$ is nonsingular and $(A^{-1})^{-1} = A$ \\
+(iii) If B is also a nonsingular n X n matrix then $(AB)^{-1} = B^{-1} A^{-1}$
+\end{center}
+
+\textbf {Definition 6.13} The transpose of an n X n matrix A = $[a_{ij}]$ is the m X n matrix $A^{t} = [a_{ji}]$ where for each i the ith column of $A^{t}$ is the same as the ith row of A. A square matrix A is called symmetric if $A = A^{t}$
+
+\textbf {Theorem 6.14} The following operations involving the transpose of a matrix hold whenever the operation is possible
+\begin{center}
+(i) $(A^{t})^{t} = A$ \\
+(ii) $(A + B)^t = A^t + B^t$ \\
+(iii) $(AB)^t = B^t A^t$ \\
+(iv) if $A^{-1}$ exists, then $(A^{-1})^t = (A^t)^{-1}$
+\end{center}
+
+\textbf {Chapter 6.4 The Determinant of a Matrix}
+
+\textbf {Definition 6.18} Suppose that A is a square matrix
+\begin{center}
+(i) If A = [a] is a 1 x 1 matrix, then det A = a \\
+(ii) If A is an n x n matrix, with n > 1 the minor $M_{ij}$ is the determinant of the (n-1) x (n-1) submatrix of A obtained by deleting the ith row and jth column of the matrix A \\
+(iii) The cofactor $A_{ij}$ associated with $M_{ij}$ is defined by $A_{ij} = (-1)^{i+j} M_{ij}$. \\
+(iv) The determinant of the n x n matrix A, when n > 1, is given either by \\
+det A = $\Sigma_{j=1}^{n} a_{ij} A_{ij} = \Sigma_{j=1}^{n} (-1)^{i+j} a_{ij} M_{ij}$ for any i = 1,2,...,n \\
+or by \\
+det A = $\Sigma_{j=1}^{n} a_{ij} A_{ij} = \Sigma_{j=1}^{n} (-1)^{i+j} a_{ij} M_{ij}$ for any j = 1,2,...,n
+\end{center}
+
+\textbf {Theorem 6.16} Suppose A is an n x n matrix: 
+\begin{center}
+(i) If any row or column of A has only zero entries, then det A = 0. \\
+(ii) If A has two rows or two columns the same, then det A = 0. \\
+(iii) If $\bar{A}$ is obtained from A by the operation $(E_i) \xrightarrow (E_j)$, with $ i \neq j$, then det $\bar{A} = -det A$ \\
+(iv) If $\bar{A}$ is obtained from A by the operation $(\lambda E_i) \rightarrow (E_i)$, then det $\bar{A} = \lambda$ det A \\
+(v) If $\bar{A}$ is obtained from A by the operation ($E_i + \lambda E_j) \rightarrow (E_i)$ with $i \neq j$, then det $\bar{A} = $ det A. \\
+(vi) If B is also an n x n matrix, then det AB = det A det B \\
+(vii) det $\bar{A}$ = det A.\\
+(viii) When $A^{-1}$ exists, det $A^{-1} = $ (det $ A)^{-1}$
+(ix) If A is an upper triangular, lower triangular or diagonal matrix, then det A = $\prod_{i=1}^{n} a_{ij}$
+\end{center}
+
+\textbf {Theorem 6.17} The following statements are equivalent for any n x n matrix A:
+\begin{center}
+(i) The equation Ax = 0 has the unique solution x = 0 \\
+(ii) The system Ax = b has a unique solution for any n-dimensional column vector b \\
+(iii) The matrix A is nonsingular, that is, $A^{-1}$ exists \\
+(iv) det A $\neq$ 0 \\
+(v) Gaussian Elimination with row interchanges can be performed on the system Ax = b for any n-dimensional column vector b.
+\end{center}
+
+\textbf {Corollary 6.18} Suppose that A and B are both n x n matrices with either AB = I or BA = I. Then B = $A^{-1}$ (and A = $B^{-1}$.
+
+\textbf {Theorem 6.19} If Gaussian elimination can be performed on the linear system Ax = b without row interchanges, then the matrix A can be factored into the product of a lower-triangular matrix L and an upper-triangular matrix U, that is, A = LU, where $m_{ji} = a_{ji}^{(i)} / a_{ii}^{(i)}$
+
+\begin{center}
+U = $ 
+\begin{bmatrix}
+
+a_{11}^{(1)} & a_{12}^{(i)} & \dots \dots  & a_{1n}^{(1)} \\
+0 & a_{22}^{(2)} & & \vdots \\
+\vdots  & \vdots & \ddots & a_{n-1, n}^{(n-1)} \\
+0 & \dots \dots & 0 & a_{nn}^{(n)}
+\end{bmatrix}
+$
+\\ and L = 
+$
+\begin{bmatrix}
+1 & 0 & \dots \dots \dots & 0 \vdots \\
+m_{21} & 1 \\
+\vdots & & \ddots & 0 \\
+m_{n1} \dots \dots & m_{n, n-1}  & & 1
+\end{bmatrix}
+$
+\end{center}
+
+\textbf {Chapter 6.6 Special Types of Matrices}
+
+\textbf {Definition 6.20} The n x n matrix A is said to be diagonally dominnant when
+\begin{center}
+$
+|a_{ii} \geq \sum_{\substack{j=1\\ j \neq i}}^n |a_{ij}|
+$
+holds for each i = 1,2,...,n
+\end{center}
+
+\textbf {Theorem 6.21} A strictly diagonally dominant matrix A is nonsingular. Moreover in this case, Gaussian elimination can be performed on any linear system of the form Ax = b to obtain its unique solution without row or column interchanges, and the computations will be stable with respect to the growth of round-off errors.
+
+\textbf {Definition 6.22} A matrix A is positive definite if it is symmetric and if $x^{t}Ax > 0$ for every n-dimensional vector $x \neq 0$.
+
+\textbf {Theorem 6.23} If A is an n x n positive definite matrix, then
+\begin{center}
+(i) A has an inverse; \\
+(ii) $a_{ij} > 0$, for each i = 1,2,...,n \\
+(iii) $max_{1 \leq k, j \leq n} |a_{kj} \leq$ $max_{1 \leq i \leq n} |a_{ii}$; \\
+(iv) $(a_{ij})^2 < a_{ii} a_{jj},$ for each $i \neq j $
+\end{center}
+
+\textbf {Definition 6.24} A leading principal submatrix of a matrix A is a matrix of the form 
+\begin{center}
+$A_k =
+\begin{bmatrix}
+a_{11} & a_{12} & \dots & a_{1k} \\
+a_{21} & a_{22} & \dots & a_{2k} \\
+\vdots & \vdots & & \vdots \\
+a_{k1} & a_{k2} & \dots & a_{kk}
+\end{bmatrix}
+$
+\end{center}
+
+for some $1 \leq k \leq n$.
+
+\textbf {Theorem 6.25} A symmetric matrix A is positive definite if and only if each of its leading principal submatrices has a positive determinant.
+
+\textbf {Theorem 6.26} The symmetric matrix A is positive definite if and only if Gaussian elimination without row interchanges can be performed on the linear system Ax = b with all pivot elements positive. Moreover, in this case, the computations are stable with respect to the growth of round-off errors.
+
+\textbf {Corollary 6.27} The matrix A is positive definite if and only if A can be factored in the form $LDL^{t}$, where L is lower triangular with 1s on its diagonal and D is a diagonal matrix with positive diagonal entries.
+
+\textbf {Corollary 6.28} The matrix A is positive definite if and only if A can be factored in the form $LL^{t}$, where L is lower triangular with nonzero diagonal entries.
+
+\textbf {Corollary 6.29} Let A be a symmetric n x n matrix for which Gaussian elimination can be applied without row interchanges. Then A can be factored into $LDL^{t}$, where L is lower triangular with 1s on its diagonal and D is the diagonal matrix with $a_{11}^{(1)}...a_{nn}^{(n)}$
+
+\textbf {Definition 6.30} An n x n matrix is called a band matrix if integer p and q, with 1 < p, q < n, exist with the property that $a_{ij} = 0$ whenever $p \leq j - 1$ or $q \leq i - j$. The band width of a band matrix is defined as w = p + q - 1.
+
+\textbf {Theorem 6.31} Suppose that A = $[a_{ij}]$ is tridiagonal with $a_{i,i-1} a_{i, i + 1} \neq 0$ for each i = 2,3,...,n - 1. If $|a_{11}| > |a_{12}|,$ $|a_{ii}| \geq |a_{i, i-1}|$, for each i = 2,3,...,n - 1, and $|a_{nn}| > |a_{n, n-1}$, then A is nonsingular and the values of $l_{ii}$ described in the Crout Factorization Algorithm are nonzero for each i = 1,2,..,n.
+
+\textbf {Chapter 7 Iterative Techniques in Matrix Algebra}
+
+\textbf {Chapter 7.1 Norms of Vectors and Matrices} 
+
+\textbf {Definition 7.1} A vector norm of $R^n$ is a function, $|| \cdot ||$ from $R^n$ into R with the following properties: 
+\begin{center}
+(i) $||x|| \geq 0$ for all $x \in R^n$ \\
+(ii) $|| x || = 0$ if and only if x = 0 \\
+(iii) $||\alpha x || = |\alpha| ||x||$ for all $\alpha \in R$ and $x \in R^n$ \\
+(iv) $|| x + y || \leq ||x|| + ||y||$ for all $x, y \in R^n$
+\end{center}
+
+\textbf {Definition 7.2} The $I_2$ and $I_\infty$ norms for the vector $x = (x_1, x_2,..., x_n)^{t}$ are defined by
+\begin{center}
+$||x||_2 = {\{ \sum_{i=1}^n x_{i}^{2} \}^{1/2}}$ and $||x||_\infty = {\underset {1 \leq i \leq n}{max} |x_i|}$
+\end{center} 
+
+\textbf {Theorem 7.3 (Cauchy Bunyakovsky-Schwarz Inequality for Sums)} \\
+For each $x = (x_1 , x_2 ,..., x_n)^{t}$ and $y = (y_1 , y_2, ..., y_n)^{t}$ in $R^n$,
+\begin{center}
+$x^{t} y = \sum_{i=1}^n x_i y_i \leq \{\sum_{i=1}^n x_{i}^2\}^{1/2} \{\sum_{i=1}^n y_{i}^2 \}^{1/2} = ||x||_2 \cdot ||y||_2$
+\end{center}
+
+\textbf {Definition 7.4} If $x = (x_1, x_2,...,x_n)^{t}$ and $y = (y_1, y_2 ,..., y_n)^{t}$ are vectors in $R^n$, and $l_2$ and $l_\infty$ distances between x and y are defined by 
+\begin{center}
+$||x-y||_2 = \{ \sum_{i=1}^n (x_i - y_i)^2 \}^{1/2}$ and $||x-y||_\infty = \underset {1 \leq i \leq n}{max} |x_i - y_i|$
+\end{center}
+
+\textbf {Definition 7.5} A sequence $\{x^{(k)}\}_{k=1}^\infty$ of vectors in $R^n$ is said to converge to x with respect to the norm $||\cdot||$ if given any $\epsilon > 0$, there exists an integer $N(\epsilon)$ such that
+
+\begin{center}
+$||x^{(k)} - x || < \epsilon$, for all $k \geq N(\epsilon)$
+\end{center}
+
+\textbf {Theorem 7.6} The sequence of vectors $\{x^{(k)}\}$ converges to x in $R^n$ with respect to the $l_\infty$ norm if and only if $\lim_{k \to \infty} x_i^{(k)} = x_i$ for each i = 1,2,...,n
+
+\textbf {Theorem 7.7} For each $x \in R^n$,
+\begin{center}
+$||x||_\infty \leq ||x||_2 \leq \sqrt{n} ||x||_\infty$
+\end{center}
+
+\textbf {Definition 7.8} A matrix norm on the set of all n x n matrices is a real valued function $|| \cdots ||$ defined on this set, satisfying for all n x n matrices A and B and all real numbers $\alpha$:
+\begin{center}
+(i) $||A|| \geq 0$ \\
+(ii) $||A|| = 0$ if and only if A is O, the matrix with all 0 entries; \\
+(iii) $||\alpha A|| = |\alpha| ||A||$; \\
+(iv) $||A + B|| \leq ||A|| + ||B||$; \\
+(v) $||AB|| \leq ||A|| ||B||$
+
+\end{center}
+The distance between n x n matrices A and B with respect to this matrix norm is $||A-B||$.
+
+\textbf {Theorem 7.9} If $|| \cdot ||$ is a vector norm on $R^n$, then
+\begin{center}
+$||A|| = \underset{||x||=1}{max} ||Ax||$
+\end{center}
+is a matrix norm.
+
+\textbf {Corollary 7.10} For any vector $z \neq 0 $ matrix A, and any natural norm $|| \cdots ||$ we have
+\begin{center}
+$||Az|| \leq ||A|| \cdots ||z||$
+\end{center}
+
+\textbf {Theorem 7.11} If $A = (a_{ij})$ is an n x n matrix, then
+\begin{center}
+$||A||_\infty = \underset {1 \leq i \leq n}{max} \sum_{j=1}^n |a_{ij}|$
+\end{center}
+
+\textbf {Definition 7.12} If A is a square matrix, the characteristic polynomial of A is defined by 
+\begin{center}
+$p(\lambda) = det(A - \lambda I)$
+\end{center}
+
+\textbf {Definition 7.13} If p is the characteristic polynomial of the matrix A, the zeros of p are eigenvalues or characteristic values, of the matrix A. If $\lambda$ is an eigenvalue of A and $x \neq 0$ satisfies $(A-\lambda I) x = 0$ then x is an eigenvector, orcharacteristic vector, of A corresponding to the eigenvalue $\lambda$.
+
+\textbf {Spectral Radius}
+
+\textbf {Definition 7.14} The Spectral radius p(A) of a matrix A is defined by
+\begin{center}
+$p(A) = max |\lambda|,$ where $\lambda$ is an eigenvalue of A.
+\end{center}
+(For complex $\lambda = \alpha + \beta i$, we define $|\lambda| = (\alpha^2 + \beta^2)^{1/2})$
+
+\textbf {Theorem 7.15} If A is an n x n matrix, then
+\begin{center}
+(i) $||A||_2 = [p(A^{t}A)]^{1/2}$ \\
+(ii) $p(A) \leq ||A||.$ for any natural norm $|| \cdots ||$
+\end{center}
+
+\textbf {Definition 7.16} We call an n x n matrix A convergent if 
+\begin{center}
+$\underset{k \to \infty}{lim} (A^k)_{ij} = 0.$ for each i = 1,2,...,n and j = 1,2,...,n
+\end{center}
+
+\textbf {Theorem 7.17} The following statements are equivalent
+\begin{center}
+(i) A is a convergent matrix \\
+(ii) $\lim_{n \to \infty} ||A^n|| = 0,$ for some natural norm \\
+(iii) $\lim_{n \to \infty} ||A^n|| = 0$ for all natural norms \\
+(iv) p(A) < 1 \\
+(v) $\lim_{n \to \infty} A^n x = 0$ for every x \\
+\end{center}
+
+\textbf {Chapter 7.3 The Jacobi and Gauss-Siedel Iterative Techniques}
+
+\textbf {Lemma 7.18} If the spectral radius satisfies p(T) < 1, then $(l - T)^{-1}$ exists and
+\begin{center}
+$(l -T)^{-1} = l + T + T^2 + ... = \sum_{j=0}^{\infty} T^j$
+\end{center}
+
+\textbf {Theorem 7.19} For any $x^{(0)} \in R^n$ the sequence $\{x^{(k)} \}_{k=0}^\infty$ defined by
+\begin{center}
+$x^{(k)} = Tx^{(k-1)} + c,$ for each $k \geq 1.$
+\end{center}
+converges to the unique solution of x = Tx + c if and only if p(T) < 1.
+
+\textbf {Corollary 7.20} If $||T|| < 1$ for any natural matrix norm and c is a given vector, then the sequence $\{x^{(k)}\}_{k=0}^\infty$ defined by $x^{(k)} = Tx^{(k-1)} + c$ converges, for any $x^{(0)} \in R^n$ to a vector $x \in R^n$, with x = Tx + c, and the following error bounds hold:
+\begin{center}
+(i) $||x - x^{(k)} || \leq ||T||^k ||x^{(0)} - x||$; \\
+(ii) $||x - x^{(k)}|| \leq \frac{||T||^k}{1-||T||} ||x^{(1)} - x^{(0)} ||$
+\end{center}
+
+\textbf {Theorem 7.21} If A is strictly diagonally dominant, then for any choice of $x^{(0)}$ both the Jacobi and Gauss-Seidel methods give seqeunces $\{x^{(k)}\}_{k=0}^\infty$ that converge to the unique solution of Ax = b.
+
+\textbf {Theorem 7.22 (Stein-Rosenberg)} \\
+If $a_{ij} \leq 0$ for each $i \neq j$ and $a_{ii} > 0$, for each i = 1,2,...,n, then one and only one of the following statements holds
+\begin{center}
+(i) $ 0 \leq p(T_g) < p(T_j) < 1;$ \\
+(ii) $1 < p(T_j) < p(T_g);$ \\
+(iii) $p(T_j) = p(T_g) = 0;$ \\
+(iv) $p(T_j) = p(T_g) = 1$;
+\end{center}
+
+\textbf {Chapter 7.4 Relaxation Techniques for Solving Linear Systems}
+
+\textbf {Definition 7.23} Suppose $\bar{x} \in R^n$ is an approximation to the solution of the linear system defined by Ax = b. The residual vector for $\bar{x}$ with respect to this system is $r = b - A \bar{x}$.
+
+\textbf {Theorem 7.24 (Kahan)} \\
+If $a_{ii} \neq 0$ for each i = 1,2,...,n then $p(T_\omega) \geq |\omega - 1|$. This implies that the SOR method can converge only if $0 < \omega < 2$
+
+\textbf {Theorem 7.25 (Ostrowski-Reich)} \\
+If A is a positive definite matrix and $0 < \omega < 2$, then the SOR method converges for any choice of initial approximate vector $x^{(0)}$.
+
+\textbf {Theorem 7.26} If A is positive definite and tridiagonal then $p(T_g) = [p(T_j)]^2 < 1$, and the optimal choice of $\omega$ for the SOR method is 
+\begin{center}
+$\omega = \frac{2}{1 + \sqrt{1 - [p(T_j)]^2}}$
+\end{center}
+With this choice of $\omega$, we have $p(T_\omega) = \omega - 1$.
+
+\textbf {Chapter 7.5 Error Bounds and Iterative Refinement}
+
+\textbf {Theorem 7.27} Suppose that $\bar{x}$ is an approximation to the solution of Ax = b. A is a nonsingular matrix and r is the residual vector for $\bar{x}$. Then for any natural norm
+\begin{center}
+$||x-\bar{x}|| \leq ||r|| \cdots ||A^{-1}||$
+\end{center}
+and if $x \neq 0$ and $b \neq 0$
+\begin{center}
+$\frac{||x-\bar{x}||}{||x||} \leq ||A|| \cdots ||A^{-1}|| \frac{||r||}{||b||}$
+\textbf {Definition 7.28} The condition number of the nonsingular matrix A relative to norm $|| \cdots ||$ is 
+\begin{center}
+$K(A) = ||A|| \cdots ||A^{-1}||$
+\end{center}
+
+\textbf {Theorem 7.29} Suppose A is nonsingular and
+\begin{center}
+$||\delta|| < \frac{1}{||A^{-1}||}$
+\end{center}
+The solution $\bar{x}$ to (A + $\delta A) \bar{x} = b + \delta b$ approximates the solution x of Ax = b with the error estimate
+\begin{center}
+$\frac{||x-\bar{x}||}{||x||} \leq \frac{K(A)||A||}{||A|| - K(A)||\delta A||} (\frac{||\delta b||}{||b||} + \frac {||\delta A||}{||A||})$ 
+\end{center}
+
+\textbf {Chapter 7.6 The Conjugate Gradient Method}
+
+\textbf {Theorem 7.30} For any vectors x, y and z and any real number $\alpha$ we have
+\begin{center}
+(a) $\langle  x, y \rangle = \langle y, x \rangle$ \\
+(b) $\langle \alpha x, y \rangle = \langle x , \alpha y \rangle = \alpha \langle x, y \rangle$ \\
+(c) $ \langle x + z, y \rangle = \langle x, y \rangle + \langle z , y \rangle$ \\
+(d) $\langle x, x \rangle \geq 0$; \\
+(e) $\langle x, x \rangle = 0$ if and only if x = 0;
+\end{center}
+
+\textbf {Theorem 7.31} The vector x* is a solution to the positive definite linear system Ax = b if and only if x* produces the minimal value of 
+\begin{center}
+$g(x) = \langle x, Ax \rangle - 2(x, b)$
+\end{center}
+
+\textbf {Theorem 7.32} Let $\{v^{(1)} ,..., v^{(n)}$ be an A-orthogonal set of nonzero vectors associated with the positive definite matrix A, and let $x^{(0)}$ be arbitrary. Define 
+\begin{center}
+$t_k = \frac{\langle v^{(k)} , b - Ax^{(k-1)}\rangle}{ \langle v^{(k)}, Av^{(k)} \rangle}$ and $x^{(k)} = x^{(k-1)} + t_k v^{(k)}$
+\end{center}
+for k = 1,2,...,n. Then assuming exact arithmetic, $Ax^{(n)} = b$
+
+\textbf {Theorem 7.33} The residual vectors $r^{(k)}$, where k = 1,2,...,n for a conjugate direction method, satisfy the equations 
+\begin{center}
+$\langle r^{(k)} , v^{(j)} = 0,$ for each j=1,2,...,k.
+\end{center}
+\end{center}
+
+\end{document}
